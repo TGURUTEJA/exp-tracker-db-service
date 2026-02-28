@@ -1,0 +1,230 @@
+{
+  "info": {
+    "_postman_id": "2375e328-a4c8-441a-8c67-9c7bc9427b03",
+    "name": "Login",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24628458"
+  },
+  "item": [
+    {
+      "name": "login Valid userName and Password",
+      "id": "c67920ec-6245-43fc-8288-9d815b0abbe6",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"userName\": \"alicej1\",\r\n  \"password\": \"alicepwd\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login inValid password valid userName",
+      "id": "210c839f-979d-43c7-be1d-b0768ecbe149",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"userName\": \"alicej1\",\r\n  \"password\": \"alicepwd\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Valid email invalid passowrd",
+      "id": "e2af287e-de8b-4249-b368-1317fced5c10",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"jane.smith@example.com\",\r\n  \"password\": \"alicepwd\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "inValid email and password",
+      "id": "0db718c6-c29d-4b6c-918a-621ca2c50b49",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"jane.smith@example.com\",\r\n  \"password\": \"alicepwd\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "valid email and Password",
+      "id": "294fa70d-8397-445b-8429-464671f94a80",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"jane.smith@example.com\",\r\n  \"password\": \"alicepwd\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Email-verify",
+      "id": "633e22ef-f3d2-410e-84ef-4fba71baaeb4",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/auth/Email-verify?token=eyJraWQiOiJmOGE1MGQ1Yi1mOGFlLTQ5OWYtYmYwYS00NDFhZTgzZmU0YzkiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdXRoLXNlcnZpY2UiLCJzdWIiOiJPVFBUb2tlbiIsInBhdGgiOiJFbWFpbCBWZXJpZmljYWN0aW9uIiwiSUQiOjQsImV4cCI6MTc2MDUwNzI1MCwiaWF0IjoxNzYwNTA2MzUwfQ.XfgBI1uEdEH-wrJru1iVUvYSa1akmXs-A_Mp4uqkwea-prXFaIepgH6wo4SdKaANFpYEzR65-5JuABZomL88prQKus8FowUwzkfYnMeEkERFTYWv0LU_6WPCxaGgbfypX1pT8OTW1vElNzcqejd4OGIziXhwxH4ZeG-s4HyJYMoVarQohGHzfmIDuv0jWSUH0erwW3TzIdfh0Yqv8QuUbooIBkcTSWLiMuHoQdMgjbquwFnurzH35dTAIXZ8KSiP_Kcy2et33HMMAx3qFG3BMDoOeutwDeQIqxvyZIbZpcbnKrP5-z6dHUWTgIVwFZqq7AZq1BwMNEoAAk4ylRqV1A",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "auth",
+            "Email-verify"
+          ],
+          "query": [
+            {
+              "key": "token",
+              "value": "eyJraWQiOiJmOGE1MGQ1Yi1mOGFlLTQ5OWYtYmYwYS00NDFhZTgzZmU0YzkiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdXRoLXNlcnZpY2UiLCJzdWIiOiJPVFBUb2tlbiIsInBhdGgiOiJFbWFpbCBWZXJpZmljYWN0aW9uIiwiSUQiOjQsImV4cCI6MTc2MDUwNzI1MCwiaWF0IjoxNzYwNTA2MzUwfQ.XfgBI1uEdEH-wrJru1iVUvYSa1akmXs-A_Mp4uqkwea-prXFaIepgH6wo4SdKaANFpYEzR65-5JuABZomL88prQKus8FowUwzkfYnMeEkERFTYWv0LU_6WPCxaGgbfypX1pT8OTW1vElNzcqejd4OGIziXhwxH4ZeG-s4HyJYMoVarQohGHzfmIDuv0jWSUH0erwW3TzIdfh0Yqv8QuUbooIBkcTSWLiMuHoQdMgjbquwFnurzH35dTAIXZ8KSiP_Kcy2et33HMMAx3qFG3BMDoOeutwDeQIqxvyZIbZpcbnKrP5-z6dHUWTgIVwFZqq7AZq1BwMNEoAAk4ylRqV1A"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Email-verify",
+      "id": "b7575b43-80b5-4bf2-9513-b94fc0d39d9a",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/auth/Email-verify?token=eyJraWQiOiJmOGE1MGQ1Yi1mOGFlLTQ5OWYtYmYwYS00NDFhZTgzZmU0YzkiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdXRoLXNlcnZpY2UiLCJzdWIiOiJPVFBUb2tlbiIsInBhdGgiOiJFbWFpbCBWZXJpZmljYWN0aW9uIiwiSUQiOjQsImV4cCI6MTc2MDUwNzI1MCwiaWF0IjoxNzYwNTA2MzUwfQ.XfgBI1uEdEH-wrJru1iVUvYSa1akmXs-A_Mp4uqkwea-prXFaIepgH6wo4SdKaANFpYEzR65-5JuABZomL88prQKus8FowUwzkfYnMeEkERFTYWv0LU_6WPCxaGgbfypX1pT8OTW1vElNzcqejd4OGIziXhwxH4ZeG-s4HyJYMoVarQohGHzfmIDuv0jWSUH0erwW3TzIdfh0Yqv8QuUbooIBkcTSWLiMuHoQdMgjbquwFnurzH35dTAIXZ8KSiP_Kcy2et33HMMAx3qFG3BMDoOeutwDeQIqxvyZIbZpcbnKrP5-z6dHUWTgIVwFZqq7AZq1BwMNEoAAk4ylRqV1A",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "auth",
+            "Email-verify"
+          ],
+          "query": [
+            {
+              "key": "token",
+              "value": "eyJraWQiOiJmOGE1MGQ1Yi1mOGFlLTQ5OWYtYmYwYS00NDFhZTgzZmU0YzkiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdXRoLXNlcnZpY2UiLCJzdWIiOiJPVFBUb2tlbiIsInBhdGgiOiJFbWFpbCBWZXJpZmljYWN0aW9uIiwiSUQiOjQsImV4cCI6MTc2MDUwNzI1MCwiaWF0IjoxNzYwNTA2MzUwfQ.XfgBI1uEdEH-wrJru1iVUvYSa1akmXs-A_Mp4uqkwea-prXFaIepgH6wo4SdKaANFpYEzR65-5JuABZomL88prQKus8FowUwzkfYnMeEkERFTYWv0LU_6WPCxaGgbfypX1pT8OTW1vElNzcqejd4OGIziXhwxH4ZeG-s4HyJYMoVarQohGHzfmIDuv0jWSUH0erwW3TzIdfh0Yqv8QuUbooIBkcTSWLiMuHoQdMgjbquwFnurzH35dTAIXZ8KSiP_Kcy2et33HMMAx3qFG3BMDoOeutwDeQIqxvyZIbZpcbnKrP5-z6dHUWTgIVwFZqq7AZq1BwMNEoAAk4ylRqV1A"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

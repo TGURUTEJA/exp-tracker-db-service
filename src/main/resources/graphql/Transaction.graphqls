@@ -1,0 +1,34 @@
+type Transaction {
+    id: Int
+    userId: String
+    amount: Float
+    debitCredit: String
+    categoryId: Int
+    description: String
+    created: String
+    accountBalance: Float
+}
+
+type TransactionListResponse{
+    message: String
+    error: Boolean
+    data: [Transaction]
+}
+type TransactionResponse{
+    message: String
+    error: Boolean
+    data: Transaction
+}
+type TransactionDeleteResponse{
+    message: String
+    error: Boolean!
+    data: Boolean
+}
+input TransactionPojo {
+    userId: String
+    accountId: Float
+    debitCredit: String
+    categoryId: Int
+    description: String
+    amount: Float
+}

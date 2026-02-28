@@ -1,0 +1,38 @@
+scalar Date
+
+type UserDetails {
+    id: String!
+    firstName: String!
+    lastName: String
+    dob: Date
+}
+
+# Generic response wrapper
+type UserDetailsResponse {
+    message: String
+    error: Boolean
+    data: UserDetails
+}
+
+type UserListResponse {
+    message: String
+    error: Boolean
+    data: [UserDetails]
+}
+
+input UserInput {
+    id: String
+    firstName: String
+    lastName: String
+    dob: Date
+}
+
+type UserDeleteResponse {
+    message: String
+    error: Boolean!
+    data: Boolean
+}
+
+input UserIDInput {
+    id: String!
+}

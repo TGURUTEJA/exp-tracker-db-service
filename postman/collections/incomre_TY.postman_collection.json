@@ -1,0 +1,166 @@
+{
+  "info": {
+    "_postman_id": "f9d0b2e7-44a7-496f-a093-a1b028888e6d",
+    "name": "incomre_TY",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24628458"
+  },
+  "item": [
+    {
+      "name": "add",
+      "id": "ca1e1939-a4ea-4972-93e5-7e132c834bcd",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n        \"id\": 1,\r\n        \"category\": \"Home\",\r\n        \"expectedIncome\": 1020\r\n    }\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/addIncomeCatogary",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "addIncomeCatogary"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update",
+      "id": "dd37ccaf-6a50-4b6a-b01d-e62b99ebc427",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n        \"id\": 1,\r\n        \"category\": \"Home\",\r\n        \"expectedIncome\": 1020\r\n    }\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/updateIncomeCatogary",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "updateIncomeCatogary"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ALL",
+      "id": "ef99d512-09d7-4b2f-b954-be8044615303",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 4,\r\n  \"date\": \"2024-02-01\",\r\n  \"amount\": 100,\r\n  \"status\": \"Groceries\",\r\n  \"type\": \"Expense\"\r\n\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/getAllIncomeCatogary",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "getAllIncomeCatogary"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "byID",
+      "id": "a427f1dd-a1d9-429e-a95c-5b825950b68d",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 1\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/getByIdIncomeCatogary",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "getByIdIncomeCatogary"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete",
+      "id": "0e0bdc0a-bf90-4236-8d63-8fc59c56bdfc",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": " {\r\n        \"id\": 1\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/deleteIncomeCatogary",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "deleteIncomeCatogary"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "workspace": {
+    "id": "2fcd9dfa-795d-40e5-8fae-5cd88e2bada1"
+  },
+  "entities": {
+    "collections": [
+      "..\\postman\\collections\\Login.postman_collection.json",
+      "..\\postman\\collections\\expense.postman_collection.json",
+      "..\\postman\\collections\\expense_TY.postman_collection.json",
+      "..\\postman\\collections\\internship.postman_collection.json",
+      "..\\postman\\collections\\credit.postman_collection.json",
+      "..\\postman\\collections\\New Collection.postman_collection.json",
+      "..\\postman\\collections\\DB calls.postman_collection.json",
+      "..\\postman\\collections\\income.postman_collection.json",
+      "..\\postman\\collections\\Job.postman_collection.json",
+      "..\\postman\\collections\\incomre_TY.postman_collection.json"
+    ],
+    "environments": [],
+    "specs": [],
+    "flows": [],
+    "globals": []
+  }
+}

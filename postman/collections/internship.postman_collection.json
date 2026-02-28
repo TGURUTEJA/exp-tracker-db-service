@@ -1,0 +1,293 @@
+{
+  "info": {
+    "_postman_id": "72416684-7195-482a-ab3b-39d1135151a8",
+    "name": "internship",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24628458"
+  },
+  "item": [
+    {
+      "name": "test 1",
+      "id": "9b3cc77d-c8db-476d-9ce3-0b27daec9cb2",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"internshipTitle\": \"XYZ Development Internship\",\r\n  \"internshipVacancies\": 6,\r\n  \"internshipDescription\": \"Gain hands-on experience in software development\",\r\n  \"deadlineToApply\": \"2024-08-23\",\r\n  \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"internshipStatus\": \"Open\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addinternship",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addinternship"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 2",
+      "id": "e81befe9-d326-431b-aab4-9627e508c537",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"internshipTitle\": \"XYZ De\",\r\n  \"internshipVacancies\": 6,\r\n  \"internshipDescription\": \"Gain hands-on experience in software development\",\r\n  \"deadlineToApply\": \"2023-09-23\",\r\n  \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"internshipStatus\": \"Open\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addinternship",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addinternship"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 3",
+      "id": "4d7e1c19-a213-4f12-8201-9fb92d314088",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"internshipTitle\": \"XYZ Development \",\r\n  \"internshipVacancies\": 6,\r\n  \"internshipDescription\": \"Gain hands-on experience in software development\",\r\n  \"deadlineToApply\": \"2023-01-23\",\r\n  \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"internshipStatus\": \"Open\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addinternship",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addinternship"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 4",
+      "id": "561cae12-0b3c-46a8-a2c9-638795751f46",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"internshipTitle\": \"XYZ\",\r\n  \"internshipVacancies\": 6,\r\n  \"internshipDescription\": \"Gain hands-on experience in software development\",\r\n  \"deadlineToApply\": \"2023-02-23\",\r\n  \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"internshipStatus\": \"Open\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addinternship",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addinternship"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 5",
+      "id": "1a6e855d-6498-4215-83fc-3c1514a94b04",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"internshipTitle\": \"XYZ Development job\",\r\n  \"internshipVacancies\": 6,\r\n  \"internshipDescription\": \"Gain hands-on experience in software development\",\r\n  \"deadlineToApply\": \"dsfg\",\r\n  \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"internshipStatus\": \"Open\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addinternship",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addinternship"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 6",
+      "id": "4625cf99-2d61-49cb-b41a-a3a1c4226353",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"internshipTitle\": \"XYZ Development job\",\r\n  \"internshipVacancies\": 6,\r\n  \"internshipDescription\": \"Gain hands-on experience in software development\",\r\n  \"deadlineToApply\": \"2023-08-23\",\r\n  \"company\":{\r\n        \"id\": \"CO0841\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"internshipStatus\": \"Open\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addinternship",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addinternship"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 7",
+      "id": "cf224bb9-d649-47a1-a359-9fe040c560a4",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"internshipTitle\": \"XYZ Development job\",\r\n  \"internshipVacancies\": 6,\r\n  \"internshipDescription\": \"Gain hands-on experience in software development\",\r\n  \"deadlineToApply\": \"2023-08-23\",\r\n  \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"internshipStatus\": \"Open\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addinternship",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addinternship"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 8",
+      "id": "7abb7a54-eed4-463a-bc83-4e3848ae17cc",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"internshipTitle\": \"XYZ Development job\",\r\n  \"internshipVacancies\": 6,\r\n  \"internshipDescription\": \"Gain hands-on experience in software development\",\r\n  \"deadlineToApply\": \"2023-08-23\",\r\n  \"company\":\"hello\",\r\n  \"internshipStatus\": \"Open\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addinternship",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addinternship"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Internships",
+      "id": "fa3b7da7-1853-4b97-aad7-04397cde26eb",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/viewInternNotification/CO0846",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "viewInternNotification",
+            "CO0846"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

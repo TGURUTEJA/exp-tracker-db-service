@@ -1,0 +1,133 @@
+scalar BigDecimal
+
+"Generic single account response"
+type AccountResponse {
+    error: Boolean
+    message: String
+    data: AccountDetails
+}
+
+"List of accounts"
+type AccountListResponse {
+    error: Boolean
+    message: String
+    data: [AccountDetails]
+}
+
+"Input for creating or updating an account"
+input AccountInput {
+    id: ID
+    userId: String
+    type: String
+    displayName: String
+    balance: BigDecimal
+    currency: String
+    status: String
+    createdAt: Date
+    additionalData: AccountExtraDataInput
+}
+
+"Represents an account with optional additional subtype data"
+type AccountDetails {
+    id: ID!
+    userId: String!
+    type: String!
+    displayName: String
+    balance: Float
+    currency: String
+    status: String
+    createdAt: Date
+    additionalData: AccountExtraData
+}
+
+"""
+Holds additional details for an account depending on its type.
+Only one of these fields will be non-null.
+"""
+type AccountExtraData {
+    creditCard: CreditCardDetails
+    emi: EmiAccountDetails
+    investment: InvestmentAccountDetails
+    friend: FriendAccountDetails
+}
+
+"""
+Input type for account subtype data.
+Only one of these fields should be provided.
+"""
+input AccountExtraDataInput {
+    creditCard: CreditCardInput
+    emi: EmiInput
+    investment: InvestmentInput
+    friend: FriendInput
+}
+
+"Credit Card Account Fields"
+type CreditCardDetails {
+    outstanding: Float
+    creditLimit: Float
+    dueDate: Date
+    billDate: Date
+}
+
+input CreditCardInput {
+    outstanding: Float
+    creditLimit: Float
+    dueDate: Date
+    billDate: Date
+}
+
+"EMI / Loan Account Fields"
+type EmiAccountDetails {
+    principalAmount: Float
+    interestRate: Float
+    emiAmount: Float
+    totalInstallments: Int
+    paidInstallments: Int
+    nextDueDate: Date
+}
+
+input EmiInput {
+    principalAmount: Float
+    interestRate: Float
+    emiAmount: Float
+    totalInstallments: Int
+    paidInstallments: Int
+    nextDueDate: Date
+}
+
+"Investment Account Fields"
+type InvestmentAccountDetails {
+    investmentType: String
+    amountInvested: Float
+    currentValue: Float
+    expectedReturn: Float
+}
+
+input InvestmentInput {
+    investmentType: String
+    amountInvested: Float
+    currentValue: Float
+    expectedReturn: Float
+}
+
+"Friend / Personal Loan Account Fields"
+type FriendAccountDetails {
+    friendName: String
+    contactInfo: String
+    outstandingAmount: Float
+    loanStartDate: Date
+    loanDueDate: Date
+}
+
+input FriendInput {
+    friendName: String
+    contactInfo: String
+    outstandingAmount: Float
+    loanStartDate: Date
+    loanDueDate: Date
+}
+
+input IDInput {
+    id: String!
+}

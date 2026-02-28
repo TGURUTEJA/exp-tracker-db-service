@@ -1,0 +1,35 @@
+type Query {
+
+    getAllUsers: UserListResponse!
+    getUserById(input: IDInput!): UserDetailsResponse!
+
+    getAllCategories: CategoryListResponse!
+    getCategoryById(id: Int!): CategoryResponse!
+    getCategoriesByUserId(userId: String!): CategoryListResponse!
+
+    getAllAccounts: AccountListResponse!
+    getAccountById(id: ID!): AccountResponse!
+    getAccountsByUserId(input: IDInput!): AccountListResponse!
+
+}
+
+
+type Mutation {
+
+    createUser(input: UserInput!): UserDetailsResponse!
+    updateUser(id: String!, input: UserInput!): UserDetailsResponse!
+    deleteUser(id: String!): UserDeleteResponse!
+
+    createCategory(input: CategoryPojo!): CategoryResponse!
+    createMultipleCategories(input: [CategoryPojo]!): CategoryListResponse!
+    updateCategory(id: Int!, input: CategoryPojo!): CategoryResponse!
+    deleteCategory(id: Int!): CategoryDeleteResponse!
+
+    createAccount(body: AccountInput!): AccountResponse!
+    updateAccount(id: ID!, body: AccountInput!): AccountResponse!
+    deleteAccount(id: ID!): AccountResponse!
+
+    createTransaction(input: TransactionPojo!): TransactionResponse!
+    updateTransaction(id: Int!, input: TransactionPojo!): TransactionResponse!
+    deleteTransaction(id: Int!): TransactionDeleteResponse!
+}

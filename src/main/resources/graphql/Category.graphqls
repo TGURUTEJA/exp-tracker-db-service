@@ -1,0 +1,33 @@
+
+type Category {
+    id: Int
+    userId: String
+    name: String
+    type: String
+    icon: String
+    color: String
+}
+
+type CategoryListResponse{
+    message: String
+    error: Boolean
+    data: [Category]
+}
+type CategoryResponse{
+    message: String
+    error: Boolean
+    data: Category
+}
+type CategoryDeleteResponse{
+    message: String
+    error: Boolean!
+    data: Boolean
+}
+
+input CategoryPojo {
+    userId: String
+    name: String
+    type: String
+    icon: String
+    color: String
+}

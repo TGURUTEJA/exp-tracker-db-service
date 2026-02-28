@@ -1,0 +1,549 @@
+{
+  "info": {
+    "_postman_id": "b6ee9575-f19b-4729-a2ac-d89f78a1a9a1",
+    "name": "DB calls",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Category DB calls",
+      "item": [
+        {
+          "name": "Create Category",
+          "id": "3288d088-50b1-40d8-9edc-40609c807389",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "create multiple Categories",
+          "id": "c2496575-5c11-4b7e-aeb1-954193f3e95c",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get all categary",
+          "id": "b9aa8303-ce5a-4453-b734-b794c0f1d490",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get by id",
+          "id": "f5eea8fa-8596-476c-a888-efeac4442662",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get by userId",
+          "id": "a071b7ba-f8a6-4b81-8379-cdd234793bbe",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "update by ID",
+          "id": "ec411d11-9830-46a6-9266-761cb3d7a543",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "update by ID Copy",
+          "id": "bb78785a-f1b8-45eb-855a-8909be03f8a0",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"operationName\": \"getUserById\",\r\n  \"query\": \"query getUserById($id: String!) { getUserById(id: $id) { message error data { id firstName lastName dob } } }\",\r\n  \"variables\": {\r\n    \"id\": \"user123\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/graphql",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "graphql"
+              ]
+            }
+          }
+        }
+      ],
+      "id": "74905538-ff5e-4d06-af6d-da6dd350a55a"
+    },
+    {
+      "name": "User DB calls",
+      "item": [
+        {
+          "name": "Create user",
+          "id": "a8937ff8-ad74-4776-81e8-926eb2650a15",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"query\": \"mutation CreateUser($input: UserInput!) { createUser(input: $input) { message error data { id firstName lastName dob } } }\",\r\n  \"variables\": {\r\n    \"input\": {\r\n      \"id\": \"user123\",\r\n      \"firstName\": \"John\",\r\n      \"lastName\": \"Doe\",\r\n      \"dob\": \"1990-01-01\"\r\n    }\r\n  }\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get use by id",
+          "id": "924de1cd-882d-496a-8ed8-bf6cb7842f75",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"operationName\": \"getUserById\",\r\n  \"query\": \"query getUserById($id: String!) { getUserById(id: $id) { message error data { id firstName lastName dob } } }\",\r\n  \"variables\": {\r\n    \"id\": \"user123\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get all users",
+          "id": "83805704-1b50-4a0e-b278-2b0f3d620f0c",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"operationName\": \"getAllUsers\",\r\n  \"query\": \"query getAllUsers { getAllUsers { message error data { id firstName lastName dob } } }\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update user",
+          "id": "05e0db0e-32e7-4344-a575-3427963c9dee",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"operationName\": \"updateUser\",\r\n  \"query\": \"mutation updateUser($id: String!, $input: UserInput!) { updateUser(id: $id, input: $input) { message error data { id firstName lastName dob } } }\",\r\n  \"variables\": {\r\n    \"id\": \"user123\",\r\n    \"input\": {\r\n      \"firstName\": \"teja\"\r\n    }\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete user",
+          "id": "b6afd6b4-fffc-4e59-90fb-6986366c4666",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"query\": \"mutation deleteUser($id: String!) { deleteUser(id:$id) { error message data }} \",\r\n    \"variables\":\r\n    {\r\n        \"id\" :\"user123\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create user Copy",
+          "id": "fd1d50cb-d3a6-4862-a0df-e1271251acb3",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"query\": \"mutation CreateUser($input: UserInput!) { createUser(input: $input) { message error data { id firstName lastName dob } } }\",\r\n  \"variables\": {\r\n    \"input\": {\r\n      \"id\": \"user123\",\r\n      \"firstName\": \"John\",\r\n      \"lastName\": \"Doe\",\r\n      \"dob\": \"1990-01-01\"\r\n    }\r\n  }\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        }
+      ],
+      "id": "21160e76-5633-423a-9917-eece75695335"
+    },
+    {
+      "name": "Account DB calls",
+      "item": [
+        {
+          "name": "Create Accoint",
+          "id": "074c1078-63b3-4442-b5b2-4d99d97799aa",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get Acccount by id",
+          "id": "442ff3f8-094e-42bf-9e48-dd7d4233537a",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get account by userIsd",
+          "id": "697f4b54-8724-4c3f-b65b-48233a0f8191",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Account",
+          "id": "109ce9fe-bdee-4a21-b65a-80939b6adca0",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Account",
+          "id": "37069e56-43a5-4a61-801a-3fe6a2403489",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        }
+      ],
+      "id": "c892e6b6-0906-4f20-9c6b-c05d3cbf0316"
+    },
+    {
+      "name": "Budget",
+      "item": [
+        {
+          "name": "Create new Budget",
+          "id": "cde13291-b2d6-4359-8278-a041807f19e5",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "graphql"
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        }
+      ],
+      "id": "318455ed-d7c4-4768-8e87-ac6fabe40c41"
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Create",
+          "id": "1c0b028c-f94f-41d0-bdca-d819ef46576b",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"query\": \"mutation createTransaction($input: TransactionPojo!) { createTransaction(input: $input) { error message data { id userId amount debitCredit description categoryId } } }\",\r\n  \"variables\": {\r\n    \"input\": {\r\n      \"userId\": \"1\",\r\n      \"accountId\": 1,\r\n      \"amount\" : 100,\r\n      \"debitCredit\": \"credit\",\r\n      \"description\": \"test\",\r\n      \"categoryId\": 1\r\n    }\r\n  }\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{GraphQlUrl}}",
+              "host": [
+                "{{GraphQlUrl}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Copy",
+          "id": "fa3b3ba4-1dec-4b76-8a09-468a51b42205",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "javascript"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/DB/transaction/test",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "DB",
+                "transaction",
+                "test"
+              ]
+            }
+          }
+        }
+      ],
+      "id": "23efff59-c6fa-45cf-a8d1-6c5877882878"
+    },
+    {
+      "name": "Create Category",
+      "id": "3288d088-50b1-40d8-9edc-40609c807389",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql"
+        },
+        "url": {
+          "raw": "{{GraphQlUrl}}",
+          "host": [
+            "{{GraphQlUrl}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "create multiple Categories",
+      "id": "c2496575-5c11-4b7e-aeb1-954193f3e95c",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql"
+        },
+        "url": {
+          "raw": "{{GraphQlUrl}}",
+          "host": [
+            "{{GraphQlUrl}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "get all categary",
+      "id": "b9aa8303-ce5a-4453-b734-b794c0f1d490",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql"
+        },
+        "url": {
+          "raw": "{{GraphQlUrl}}",
+          "host": [
+            "{{GraphQlUrl}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "get Acccount by id",
+      "id": "442ff3f8-094e-42bf-9e48-dd7d4233537a",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql"
+        },
+        "url": {
+          "raw": "{{GraphQlUrl}}",
+          "host": [
+            "{{GraphQlUrl}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create new Budget",
+      "id": "cde13291-b2d6-4359-8278-a041807f19e5",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "graphql"
+        },
+        "url": {
+          "raw": "{{GraphQlUrl}}",
+          "host": [
+            "{{GraphQlUrl}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create",
+      "id": "1c0b028c-f94f-41d0-bdca-d819ef46576b",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"query\": \"mutation createTransaction($input: TransactionPojo!) { createTransaction(input: $input) { error message data { id userId amount debitCredit description categoryId } } }\",\r\n  \"variables\": {\r\n    \"input\": {\r\n      \"userId\": \"1\",\r\n      \"accountId\": 1,\r\n      \"amount\" : 100,\r\n      \"debitCredit\": \"credit\",\r\n      \"description\": \"test\",\r\n      \"categoryId\": 1\r\n    }\r\n  }\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{GraphQlUrl}}",
+          "host": [
+            "{{GraphQlUrl}}"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "46ec518a-8444-4dcb-8f36-ae5806c5fd40",
+      "key": "GraphQlUrl",
+      "value": ""
+    }
+  ]
+}

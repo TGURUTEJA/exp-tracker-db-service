@@ -1,0 +1,166 @@
+{
+  "info": {
+    "_postman_id": "7c0c5290-9fad-4f7c-8aac-8994cec304d2",
+    "name": "credit",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24628458"
+  },
+  "item": [
+    {
+      "name": "add",
+      "id": "3176b2be-7b23-49b5-b70f-3bd663190c77",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 8,\r\n  \"date\": \"2024-02-01\",\r\n  \"amount\": 100,\r\n  \"status\": \"Paid\"\r\n\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/addCredit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "addCredit"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update",
+      "id": "f526a01d-a949-459e-933f-e34be113ec63",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 4,\r\n  \"date\": \"2024-02-01\",\r\n  \"amount\": 100,\r\n  \"status\": \"Groceries\",\r\n  \"type\": \"Expense\"\r\n\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/updateCredit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "updateCredit"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ALL",
+      "id": "9ad358fe-17d7-4773-afbe-a3ce0b3cd4c5",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 4,\r\n  \"date\": \"2024-02-01\",\r\n  \"amount\": 100,\r\n  \"status\": \"Groceries\",\r\n  \"type\": \"Expense\"\r\n\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/getAllCredit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "getAllCredit"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "byID",
+      "id": "ad4ce8e0-01bb-4cb3-aad6-2ab2fe761642",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 8\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/getByIdCredit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "getByIdCredit"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete",
+      "id": "011af444-3480-4479-9948-fc1b520336ee",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": " {\r\n        \"id\": 8\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/deleteCredit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "deleteCredit"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,467 @@
+{
+  "info": {
+    "_postman_id": "f18ffa3f-4c7b-41a0-814b-cdf0d00edefa",
+    "name": "Job",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24628458"
+  },
+  "item": [
+    {
+      "name": "test 1",
+      "id": "e5c16eec-ebb3-4aa3-88b6-9176feee1184",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=---011000010111000001101001",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Key",
+            "value": "20b7b3cc04msh593c54e4acf6f5dp1b3181jsn31945b961ea8",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Host",
+            "value": "pen-to-print-handwriting-ocr.p.rapidapi.com",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"jobTitle\": \"Software Developer job\",\r\n  \"jobVacancies\": 5,\r\n  \"jobDescription\": \"We are looking for a skilled software developer to join our team.\",\r\n  \"jobType\": \"Full-time\",\r\n  \"deadlineToApply\": \"2023-08-30\",\r\n    \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"candidatesId\": \"hello\",\r\n  \"jobStatus\": \"Open\"\r\n}   \r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addjob",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addjob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 2",
+      "id": "58525cc3-8e0c-42e2-a7f2-55e30ba001ea",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=---011000010111000001101001",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Key",
+            "value": "20b7b3cc04msh593c54e4acf6f5dp1b3181jsn31945b961ea8",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Host",
+            "value": "pen-to-print-handwriting-ocr.p.rapidapi.com",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"jobTitle\": \"Software Developer job\",\r\n  \"jobVacancies\": 5,\r\n  \"jobDescription\": \"We are looking for a skilled software developer to join our team.\",\r\n  \"jobType\": \"Full-time\",\r\n  \"deadlineToApply\": \"2023-02-30\",\r\n    \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"candidatesId\": \"hello\",\r\n  \"jobStatus\": \"Open\"\r\n}   \r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addjob",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addjob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 3",
+      "id": "8db0d806-08ac-43fd-920d-8afde842961a",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=---011000010111000001101001",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Key",
+            "value": "20b7b3cc04msh593c54e4acf6f5dp1b3181jsn31945b961ea8",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Host",
+            "value": "pen-to-print-handwriting-ocr.p.rapidapi.com",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"jobTitle\": \"XYZ\",\r\n  \"jobVacancies\": 5,\r\n  \"jobDescription\": \"We are looking for a skilled software developer to join our team.\",\r\n  \"jobType\": \"Full-time\",\r\n  \"deadlineToApply\": \"2023-08-30\",\r\n    \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"candidatesId\": \"hello\",\r\n  \"jobStatus\": \"Open\"\r\n}   \r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addjob",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addjob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 4",
+      "id": "26f92348-a612-423e-a20b-73692c607583",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=---011000010111000001101001",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Key",
+            "value": "20b7b3cc04msh593c54e4acf6f5dp1b3181jsn31945b961ea8",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Host",
+            "value": "pen-to-print-handwriting-ocr.p.rapidapi.com",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"jobTitle\": \"XYZ\",\r\n  \"jobVacancies\": 5,\r\n  \"jobDescription\": \"We are looking for a skilled software developer to join our team.\",\r\n  \"jobType\": \"Full-time\",\r\n  \"deadlineToApply\": \"2023-02-30\",\r\n    \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"candidatesId\": \"hello\",\r\n  \"jobStatus\": \"Open\"\r\n}   \r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addjob",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addjob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 5",
+      "id": "f66e370c-e3db-472d-8e8f-eb2e1e3bde7c",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=---011000010111000001101001",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Key",
+            "value": "20b7b3cc04msh593c54e4acf6f5dp1b3181jsn31945b961ea8",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Host",
+            "value": "pen-to-print-handwriting-ocr.p.rapidapi.com",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"jobTitle\": \"Software Developer job\",\r\n  \"jobVacancies\": 5,\r\n  \"jobDescription\": \"We are looking for a skilled software developer to join our team.\",\r\n  \"jobType\": \"Full-time\",\r\n  \"deadlineToApply\": \"hi\",\r\n    \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"candidatesId\": \"hello\",\r\n  \"jobStatus\": \"Open\"\r\n}   \r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addjob",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addjob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 6",
+      "id": "b28871cd-9f02-48d4-9ed0-79b50a0f291b",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=---011000010111000001101001",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Key",
+            "value": "20b7b3cc04msh593c54e4acf6f5dp1b3181jsn31945b961ea8",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Host",
+            "value": "pen-to-print-handwriting-ocr.p.rapidapi.com",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"jobTitle\": \"Software Developer job\",\r\n  \"jobVacancies\": 5,\r\n  \"jobDescription\": \"We are looking for a skilled software developer to join our team.\",\r\n  \"jobType\": \"Full-time\",\r\n  \"deadlineToApply\": \"2023-08-30\",\r\n    \"company\":{\r\n        \"id\": \"CO0841\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"candidatesId\": \"hello\",\r\n  \"jobStatus\": \"Open\"\r\n}   \r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addjob",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addjob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 7",
+      "id": "ab392a76-65e7-4313-8a05-10b8f5713e40",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {},
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=---011000010111000001101001",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Key",
+            "value": "20b7b3cc04msh593c54e4acf6f5dp1b3181jsn31945b961ea8",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Host",
+            "value": "pen-to-print-handwriting-ocr.p.rapidapi.com",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"jobTitle\": \"Software Developer job\",\r\n  \"jobVacancies\": 5,\r\n  \"jobDescription\": \"We are looking for a skilled software developer to join our team.\",\r\n  \"jobType\": \"Full-time\",\r\n  \"deadlineToApply\": \"2023-08-30\",\r\n    \"company\":{\r\n        \"id\": \"CO0846\",\r\n        \"name\": \"XYZ\",\r\n        \"address\": \"balaji nagar\",\r\n        \"email\": \"XYZ@gamil.com\",\r\n        \"phone\": 1234567890,\r\n        \"password\": \"XYZ1234\",\r\n        \"status\": \"Active\"\r\n  },\r\n  \"candidatesId\": \"hello\",\r\n  \"jobStatus\": \"Open\"\r\n}   \r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addjob",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addjob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test 8",
+      "id": "200c21eb-405e-4849-8024-d59c44a356c3",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=---011000010111000001101001",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Key",
+            "value": "20b7b3cc04msh593c54e4acf6f5dp1b3181jsn31945b961ea8",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-RapidAPI-Host",
+            "value": "pen-to-print-handwriting-ocr.p.rapidapi.com",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"jobTitle\": \"Software Developer job\",\r\n  \"jobVacancies\": 5,\r\n  \"jobDescription\": \"We are looking for a skilled software developer to join our team.\",\r\n  \"jobType\": \"Full-time\",\r\n  \"deadlineToApply\": \"2023-08-30\",\r\n    \"company\":\"hello\",\r\n  \"candidatesId\": \"hello\",\r\n  \"jobStatus\": \"Open\"\r\n}   \r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/addjob",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "addjob"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Jobs",
+      "id": "ffaf77b7-1191-47e9-940d-653dbaea1efa",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/company/notification/viewJobNotification/CO0846",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "company",
+            "notification",
+            "viewJobNotification",
+            "CO0846"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
