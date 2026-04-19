@@ -1,0 +1,156 @@
+{
+  "info": {
+    "_postman_id": "d7f1c8c1-3f3e-4b54-9a9b-7e86a5c1a111",
+    "name": "exp-tracker-db-service (GraphQL + REST)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8081" }
+  ],
+  "item": [
+    {
+      "name": "GraphQL",
+      "item": [
+        {
+          "name": "User - getAllUsers",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query { getAllUsers { error message data { id firstName lastName dob } } }\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Category - createCategory (happy)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation($input: CategoryPojo!) { createCategory(input: $input) { error message data { id userId name type icon color } } }\",\n  \"variables\": {\n    \"input\": {\n      \"userId\": \"1\",\n      \"name\": \"Food\",\n      \"type\": \"NEED\",\n      \"icon\": \"utensils\",\n      \"color\": \"#FF0000\"\n    }\n  }\n}\n"
+            }
+          }
+        },
+        {
+          "name": "Category - createCategory (invalid type)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation($input: CategoryPojo!) { createCategory(input: $input) { error message data { id } } }\",\n  \"variables\": {\n    \"input\": { \"userId\": \"1\", \"name\": \"BadType\", \"type\": \"BAD\" }\n  }\n}\n"
+            }
+          }
+        },
+        {
+          "name": "Category - createCategory (duplicate)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation($input: CategoryPojo!) { createCategory(input: $input) { error message data { id } } }\",\n  \"variables\": {\n    \"input\": { \"userId\": \"1\", \"name\": \"Food\", \"type\": \"NEED\" }\n  }\n}\n"
+            }
+          }
+        },
+        {
+          "name": "Category - getCategoriesByUserId",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query($userId: String!) { getCategoriesByUserId(userId: $userId) { error message data { id name type } } }\",\n  \"variables\": { \"userId\": \"1\" }\n}\n"
+            }
+          }
+        },
+        {
+          "name": "Category - getCategoryById (not found)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query($id: Int!) { getCategoryById(id: $id) { error message data { id name } } }\",\n  \"variables\": { \"id\": 999999 }\n}\n"
+            }
+          }
+        },
+        {
+          "name": "Budget - createBudget (happy)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation($input: BudgetInput!) { createBudget(input: $input) { error message data { id userId categoryId year month amount isActive recurrence } } }\",\n  \"variables\": {\n    \"input\": {\n      \"userId\": \"1\",\n      \"categoryId\": 1,\n      \"year\": 2026,\n      \"month\": 4,\n      \"amount\": 5000,\n      \"isActive\": true,\n      \"recurrence\": \"monthly\"\n    }\n  }\n}\n"
+            }
+          }
+        },
+        {
+          "name": "Budget - createBudget (duplicate budget test)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation($input: BudgetInput!) { createBudget(input: $input) { error message data { id } } }\",\n  \"variables\": {\n    \"input\": { \"userId\": \"1\", \"categoryId\": 1, \"year\": 2026, \"month\": 4, \"amount\": 5000 }\n  }\n}\n"
+            }
+          }
+        },
+        {
+          "name": "Budget - getBudgetsByUserIdAndDateRange",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/graphql", "host": ["{{baseUrl}}"], "path": ["graphql"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query($input: BudgetDateRangeInput!) { getBudgetsByUserIdAndDateRange(input: $input) { error message data { id year month amount } } }\",\n  \"variables\": {\n    \"input\": { \"userId\": \"1\", \"startYear\": 2026, \"startMonth\": 1, \"endYear\": 2026, \"endMonth\": 12 }\n  }\n}\n"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "REST",
+      "item": [
+        {
+          "name": "Transaction - test",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/DB/transaction/test", "host": ["{{baseUrl}}"], "path": ["api", "DB", "transaction", "test"] }
+          }
+        },
+        {
+          "name": "Transaction - by userId (GET with body)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Content-Type", "value": "text/plain" }],
+            "url": { "raw": "{{baseUrl}}/api/DB/transaction/userId", "host": ["{{baseUrl}}"], "path": ["api", "DB", "transaction", "userId"] },
+            "body": { "mode": "raw", "raw": "1" }
+          }
+        },
+        {
+          "name": "Transaction - by ID (GET with body)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/DB/transaction/ID", "host": ["{{baseUrl}}"], "path": ["api", "DB", "transaction", "ID"] },
+            "body": { "mode": "raw", "raw": "1" }
+          }
+        }
+      ]
+    }
+  ]
+}
+

@@ -11,6 +11,9 @@ type Query {
     getAccountById(id: ID!): AccountResponse!
     getAccountsByUserId(input: IDInput!): AccountListResponse!
 
+    getBudgetById(id: ID!): BudgetResponse!
+    getBudgetsByUserId(userId: String!): BudgetListResponse!
+    getBudgetsByUserIdAndDateRange(input: BudgetDateRangeInput!): BudgetListResponse!
 }
 
 
@@ -32,4 +35,8 @@ type Mutation {
     createTransaction(input: TransactionPojo!): TransactionResponse!
     updateTransaction(id: Int!, input: TransactionPojo!): TransactionResponse!
     deleteTransaction(id: Int!): TransactionDeleteResponse!
+
+    createBudget(input: BudgetInput!): BudgetResponse!
+    updateBudget(id: ID!, input: BudgetInput!): BudgetResponse!
+    deleteBudget(id: ID!): BudgetDeleteResponse!
 }
