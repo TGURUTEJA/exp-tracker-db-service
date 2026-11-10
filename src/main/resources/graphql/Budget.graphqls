@@ -2,7 +2,7 @@ scalar DateTime
 
 type Budget {
     id: ID
-    userId: String
+    userId: String!
     categoryId: Int
     year: Int
     month: Int
@@ -13,38 +13,3 @@ type Budget {
     updatedAt: DateTime
 }
 
-type BudgetResponse {
-    message: String
-    error: Boolean
-    data: Budget
-}
-
-type BudgetListResponse {
-    message: String
-    error: Boolean
-    data: [Budget]
-}
-
-type BudgetDeleteResponse {
-    message: String
-    error: Boolean!
-    data: Boolean
-}
-
-input BudgetInput {
-    userId: String
-    categoryId: Int
-    year: Int
-    month: Int
-    amount: BigDecimal
-    isActive: Boolean
-    recurrence: String
-}
-
-input BudgetDateRangeInput {
-    userId: String!
-    startYear: Int!
-    startMonth: Int!
-    endYear: Int!
-    endMonth: Int!
-}

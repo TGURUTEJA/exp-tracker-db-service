@@ -2,7 +2,6 @@ package com.expenses_traker.db_service.GraphQL;
 
 import com.expenses_traker.db_service.Entity.Budget;
 import com.expenses_traker.db_service.Service.BudgetService;
-import com.expenses_traker.db_service.pojo.APIResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -15,6 +14,8 @@ import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -28,26 +29,20 @@ class BudgetGraphQLControllerTest {
     private BudgetService budgetService;
 
     @Test
-    void createBudget_mutationReturnsApiResponse() {
+    void createBudget_mutationRetursBudget() {
         Budget saved = new Budget();
         saved.setId(1L);
-        saved.setUserId("1");
+        saved.setUserId("user123");
         saved.setCategoryId(10L);
         saved.setYear(2026);
         saved.setMonth(4);
         saved.setAmount(BigDecimal.valueOf(500));
 
-        APIResponse<Budget> api = new APIResponse<>();
-        api.setError(false);
-        api.setMessage("ok");
-        api.setData(saved);
-
-        when(budgetService.createBudget(any(Budget.class))).thenReturn(Mono.just(api));
+        when(budgetService.createBudget(any())).thenReturn(Mono.just(saved));
 
         String body = """
                 {
-                  "query": "mutation($input: BudgetInput!){ createBudget(input:$input){ error message data { id userId year month } } }",
-                  "variables": { "input": { "userId":"1", "categoryId":10, "year":2026, "month":4, "amount":500 } }
+                  "query": "mutation{ createBudget(userId:\\"user123\\", categoryId:10, year:2026, month:4, amount:500){ id userId year month amount } }"
                 }
                 """;
 
@@ -58,8 +53,34 @@ class BudgetGraphQLControllerTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.data.createBudget.error").isEqualTo(false)
-                .jsonPath("$.data.createBudget.data.userId").isEqualTo("1");
+                .jsonPath("$.data.createBudget.userId").isEqualTo("user123");
+    }
+
+    @Test
+    void getBudgetById_queryReturnsBudget() {
+        Budget budget = new Budget();
+        budget.setId(1L);
+        budget.setUserId("user123");
+        budget.setCategoryId(10L);
+        budget.setYear(2026);
+        budget.setMonth(4);
+        budget.setAmount(BigDecimal.valueOf(500));
+
+        when(budgetService.getBudgetById(anyLong(), anyString())).thenReturn(Mono.just(budget));
+
+        String body = """
+                {
+                  "query": "query{ getBudgetById(id:1, userId:\\"user123\\"){ id userId year month } }"
+                }
+                """;
+
+        webTestClient.post()
+                .uri("/graphql")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(body)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.data.getBudgetById.userId").isEqualTo("user123");
     }
 }
-

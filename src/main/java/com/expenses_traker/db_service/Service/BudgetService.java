@@ -1,9 +1,10 @@
 package com.expenses_traker.db_service.Service;
 
 import com.expenses_traker.db_service.Entity.Budget;
+import com.expenses_traker.db_service.Exception.AppException;
+import com.expenses_traker.db_service.Exception.ErrorCode;
 import com.expenses_traker.db_service.Repository.BudgetRepo;
-import com.expenses_traker.db_service.pojo.APIResponse;
-import com.expenses_traker.db_service.util.ResponseHealper;
+import com.expenses_traker.db_service.pojo.BudgetPojo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -15,169 +16,168 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BudgetService {
     private final BudgetRepo budgetRepo;
-    private final ResponseHealper responseHealper;
 
     // Create
-    public Mono<APIResponse<Budget>> createBudget(Budget budget){
-        if (budget == null) {
-            return Mono.just(responseHealper.buildErrorResponse("Budget data cannot be null"));
+    public Mono<Budget> createBudget(BudgetPojo budgetPojo) {
+        if (budgetPojo == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "Budget data cannot be null");
         }
-        String userId = safeTrim(budget.getUserId());
+
+        String userId = safeTrim(budgetPojo.getUserId());
         if (userId == null) {
-            return Mono.just(responseHealper.buildErrorResponse("userId cannot be null or empty"));
+            throw new AppException(ErrorCode.INVALID_INPUT, "User ID cannot be null or empty");
         }
-        if (budget.getCategoryId() == null) {
-            return Mono.just(responseHealper.buildErrorResponse("categoryId cannot be null"));
+        if (budgetPojo.getCategoryId() == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "Category ID cannot be null");
         }
-        if (budget.getYear() == null) {
-            return Mono.just(responseHealper.buildErrorResponse("year cannot be null"));
+        if (budgetPojo.getYear() == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "Year cannot be null");
         }
-        if (budget.getMonth() == null || budget.getMonth() < 1 || budget.getMonth() > 12) {
-            return Mono.just(responseHealper.buildErrorResponse("month must be between 1 and 12"));
+        if (budgetPojo.getMonth() == null || budgetPojo.getMonth() < 1 || budgetPojo.getMonth() > 12) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "Month must be between 1 and 12");
         }
-        if (budget.getAmount() == null) {
-            return Mono.just(responseHealper.buildErrorResponse("amount cannot be null"));
+        if (budgetPojo.getAmount() == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "Amount cannot be null");
         }
 
+        Budget budget = new Budget();
         budget.setUserId(userId);
-
-        if (budget.getIsActive() == null) {
-            budget.setIsActive(true);
-        }
-        if (budget.getRecurrence() == null) {
-            budget.setRecurrence("monthly");
-        }
+        budget.setCategoryId(budgetPojo.getCategoryId());
+        budget.setYear(budgetPojo.getYear());
+        budget.setMonth(budgetPojo.getMonth());
+        budget.setAmount(budgetPojo.getAmount());
+        budget.setIsActive(budgetPojo.getIsActive() != null ? budgetPojo.getIsActive() : true);
+        budget.setRecurrence(budgetPojo.getRecurrence() != null ? budgetPojo.getRecurrence() : "monthly");
 
         LocalDateTime now = LocalDateTime.now();
-        if (budget.getCreatedAt() == null) budget.setCreatedAt(now);
+        budget.setCreatedAt(now);
         budget.setUpdatedAt(now);
 
-        return budgetRepo.existsByUserIdAndCategoryIdAndYearAndMonth(userId, budget.getCategoryId(), budget.getYear(), budget.getMonth())
+        return budgetRepo.existsByUserIdAndCategoryIdAndYearAndMonth(userId, budgetPojo.getCategoryId(), budgetPojo.getYear(), budgetPojo.getMonth())
                 .flatMap(exists -> {
                     if (exists) {
-                        return Mono.just(responseHealper.buildErrorResponse("Budget already exists for this user/category/period"));
+                        return Mono.error(new AppException(ErrorCode.RESOURCE_ALREADY_EXISTS, "Budget already exists for this user/category/period"));
                     }
-                    return budgetRepo.save(budget)
-                            .map(savedBudget -> responseHealper.buildSuccessResponse(savedBudget, "Budget created successfully"))
-                            .onErrorResume(e -> Mono.just(responseHealper.buildErrorResponse("Failed to create budget: " + e.getMessage())));
+                    return budgetRepo.save(budget);
                 });
     }
-    // get by ID
-    public Mono<APIResponse<Budget>> getBudgetById(Long id){
+
+    // Get by ID with user ID validation
+    public Mono<Budget> getBudgetById(Long id, String userId) {
         if (id == null) {
-            return Mono.just(responseHealper.buildErrorResponse("Budget id cannot be null"));
+            throw new AppException(ErrorCode.INVALID_INPUT, "Budget ID cannot be null");
         }
+        if (userId == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "User ID cannot be null");
+        }
+
         return budgetRepo.findById(id)
-                .map(budget -> responseHealper.buildSuccessResponse(budget, "Budget retrieved successfully"))
-                .defaultIfEmpty(responseHealper.buildErrorResponse("Budget not found"))
-                .onErrorResume(e -> Mono.just(responseHealper.buildErrorResponse("Failed to retrieve budget: " + e.getMessage())));
-    }
-    // get all budgets
-    public Mono<APIResponse<List<Budget>>> getAllBudgets(){
-        return budgetRepo.findAll()
-                .collectList()
-                .map(budgets -> responseHealper.buildSuccessResponse(budgets, "Budgets retrieved successfully"))
-                .onErrorResume(e -> Mono.just(responseHealper.buildErrorResponse("Failed to retrieve budgets: " + e.getMessage())));
-    }
-    // get by user ID
-    public Mono<APIResponse<List<Budget>>> getBudgetsByUserId(String userId) {
-        if (safeTrim(userId) == null) {
-            return Mono.just(responseHealper.buildErrorResponse("userId cannot be null or empty"));
-        }
-        return budgetRepo.findByUserId(userId)
-                .collectList()
-                .map(budgets -> budgets.isEmpty() ?
-                        responseHealper.buildErrorResponse(budgets,"No budgets found for user ID: " + userId)
-                        : responseHealper.buildSuccessResponse(budgets, "Budgets retrieved successfully"))
-                .onErrorResume(e -> Mono.just(responseHealper.buildErrorResponse("Failed to retrieve budgets: " + e.getMessage())));
+                .switchIfEmpty(Mono.error(new AppException(ErrorCode.INVALID_REFERENCE, "Budget not found")))
+                .flatMap(budget -> {
+                    if (!budget.getUserId().equals(userId)) {
+                        return Mono.error(new AppException(ErrorCode.INVALID_REFERENCE, "Budget does not belong to this user"));
+                    }
+                    return Mono.just(budget);
+                });
     }
 
-    public Mono<APIResponse<List<Budget>>> getBudgetsByUserIdAndDateRange(String userId, Integer startYear, Integer startMonth, Integer endYear, Integer endMonth) {
+    // Get all budgets by user ID
+    public Mono<List<Budget>> getBudgetsByUserId(String userId) {
+        if (userId == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "User ID cannot be null");
+        }
+
+        return budgetRepo.findByUserId(userId).collectList();
+    }
+
+    // Get budgets by user ID and date range
+    public Mono<List<Budget>> getBudgetsByUserIdAndDateRange(String userId, Integer startYear, Integer startMonth, Integer endYear, Integer endMonth) {
         String uid = safeTrim(userId);
         if (uid == null) {
-            return Mono.just(responseHealper.buildErrorResponse("userId cannot be null or empty"));
+            throw new AppException(ErrorCode.INVALID_INPUT, "User ID cannot be null or empty");
         }
         if (startYear == null || endYear == null) {
-            return Mono.just(responseHealper.buildErrorResponse("startYear and endYear are required"));
+            throw new AppException(ErrorCode.INVALID_INPUT, "Start year and end year are required");
         }
         if (startMonth == null || endMonth == null || startMonth < 1 || startMonth > 12 || endMonth < 1 || endMonth > 12) {
-            return Mono.just(responseHealper.buildErrorResponse("startMonth and endMonth must be between 1 and 12"));
+            throw new AppException(ErrorCode.INVALID_INPUT, "Start month and end month must be between 1 and 12");
         }
 
         int startPeriod = startYear * 100 + startMonth;
         int endPeriod = endYear * 100 + endMonth;
         if (startPeriod > endPeriod) {
-            return Mono.just(responseHealper.buildErrorResponse("start period must be before or equal to end period"));
+            throw new AppException(ErrorCode.INVALID_INPUT, "Start period must be before or equal to end period");
         }
 
-        return budgetRepo.findByUserIdAndPeriodBetween(uid, startPeriod, endPeriod)
-                .collectList()
-                .map(list -> list.isEmpty()
-                        ? responseHealper.buildErrorResponse(list, "No budgets found for user in given range")
-                        : responseHealper.buildSuccessResponse(list, "Budgets retrieved successfully"))
-                .onErrorResume(e -> Mono.just(responseHealper.buildErrorResponse("Failed to retrieve budgets: " + e.getMessage())));
+        return budgetRepo.findByUserIdAndPeriodBetween(uid, startPeriod, endPeriod).collectList();
     }
 
-    // Update by user ID
-    public Mono<APIResponse<Budget>> updateBudget(Long id, Budget budget){
+    // Update
+    public Mono<Budget> updateBudget(Long id, String userId, BudgetPojo input) {
         if (id == null) {
-            return Mono.just(responseHealper.buildErrorResponse("Budget id cannot be null"));
+            throw new AppException(ErrorCode.INVALID_INPUT, "Budget ID cannot be null");
         }
-        if (budget == null) {
-            return Mono.just(responseHealper.buildErrorResponse("Budget data cannot be null"));
+        if (userId == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "User ID cannot be null");
         }
-        return budgetRepo.findById(id)
-                .flatMap(existingBudget -> {
-                    Long newCategoryId = budget.getCategoryId() != null ? budget.getCategoryId() : existingBudget.getCategoryId();
-                    Integer newYear = budget.getYear() != null ? budget.getYear() : existingBudget.getYear();
-                    Integer newMonth = budget.getMonth() != null ? budget.getMonth() : existingBudget.getMonth();
 
-                    if (budget.getMonth() != null && (newMonth < 1 || newMonth > 12)) {
-                        return Mono.error(new IllegalArgumentException("month must be between 1 and 12"));
+        return budgetRepo.findById(id)
+                .switchIfEmpty(Mono.error(new AppException(ErrorCode.INVALID_REFERENCE, "Budget not found")))
+                .flatMap(existing -> {
+                    if (!existing.getUserId().equals(userId)) {
+                        return Mono.error(new AppException(ErrorCode.INVALID_REFERENCE, "Budget does not belong to this user"));
+                    }
+
+                    Long newCategoryId = input.getCategoryId() != null ? input.getCategoryId() : existing.getCategoryId();
+                    Integer newYear = input.getYear() != null ? input.getYear() : existing.getYear();
+                    Integer newMonth = input.getMonth() != null ? input.getMonth() : existing.getMonth();
+
+                    if (input.getMonth() != null && (newMonth < 1 || newMonth > 12)) {
+                        return Mono.error(new AppException(ErrorCode.INVALID_INPUT, "Month must be between 1 and 12"));
                     }
 
                     Mono<Void> duplicateCheck = Mono.empty();
-                    if (!newCategoryId.equals(existingBudget.getCategoryId())
-                            || !newYear.equals(existingBudget.getYear())
-                            || !newMonth.equals(existingBudget.getMonth())) {
+                    if (!newCategoryId.equals(existing.getCategoryId())
+                            || !newYear.equals(existing.getYear())
+                            || !newMonth.equals(existing.getMonth())) {
                         duplicateCheck = budgetRepo.existsByUserIdAndCategoryIdAndYearAndMonthAndIdNot(
-                                        existingBudget.getUserId(), newCategoryId, newYear, newMonth, id
+                                        userId, newCategoryId, newYear, newMonth, id
                                 )
                                 .flatMap(exists -> exists
-                                        ? Mono.error(new IllegalArgumentException("Budget already exists for this user/category/period"))
+                                        ? Mono.error(new AppException(ErrorCode.RESOURCE_ALREADY_EXISTS, "Budget already exists for this user/category/period"))
                                         : Mono.empty());
                     }
 
                     return duplicateCheck.then(Mono.defer(() -> {
-                        if (budget.getAmount() != null) existingBudget.setAmount(budget.getAmount());
-                        if (budget.getCategoryId() != null) existingBudget.setCategoryId(budget.getCategoryId());
-                        if (budget.getYear() != null) existingBudget.setYear(budget.getYear());
-                        if (budget.getMonth() != null) existingBudget.setMonth(budget.getMonth());
-                        if (budget.getIsActive() != null) existingBudget.setIsActive(budget.getIsActive());
-                        if (budget.getRecurrence() != null) existingBudget.setRecurrence(budget.getRecurrence());
-                        existingBudget.setUpdatedAt(LocalDateTime.now());
-                        return budgetRepo.save(existingBudget);
+                        if (input.getAmount() != null) existing.setAmount(input.getAmount());
+                        if (input.getCategoryId() != null) existing.setCategoryId(input.getCategoryId());
+                        if (input.getYear() != null) existing.setYear(input.getYear());
+                        if (input.getMonth() != null) existing.setMonth(input.getMonth());
+                        if (input.getIsActive() != null) existing.setIsActive(input.getIsActive());
+                        if (input.getRecurrence() != null) existing.setRecurrence(input.getRecurrence());
+                        existing.setUpdatedAt(LocalDateTime.now());
+                        return budgetRepo.save(existing);
                     }));
-                })
-                .map(updatedBudget -> responseHealper.buildSuccessResponse(updatedBudget, "Budget updated successfully"))
-                .defaultIfEmpty(responseHealper.buildErrorResponse("Budget not found"))
-                .onErrorResume(e -> Mono.just(responseHealper.buildErrorResponse(
-                        (e instanceof IllegalArgumentException) ? e.getMessage() : "Failed to update budget: " + e.getMessage()
-                )));
+                });
     }
 
-    //Delete by ID
-    public Mono<APIResponse<Boolean>> deleteBudget(Long id){
+    // Delete
+    public Mono<Boolean> deleteBudget(Long id, String userId) {
         if (id == null) {
-            return Mono.just(responseHealper.buildErrorResponse("Budget id cannot be null"));
+            throw new AppException(ErrorCode.INVALID_INPUT, "Budget ID cannot be null");
         }
+        if (userId == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "User ID cannot be null");
+        }
+
         return budgetRepo.findById(id)
-                .flatMap(existingBudget ->
-                        budgetRepo.delete(existingBudget)
-                                .then(Mono.just(responseHealper.buildSuccessResponse(true, "Budget deleted successfully")))
-                )
-                .defaultIfEmpty(responseHealper.buildErrorResponse("Budget not found"))
-                .onErrorResume(e -> Mono.just(responseHealper.buildErrorResponse("Failed to delete budget: " + e.getMessage())));
+                .switchIfEmpty(Mono.error(new AppException(ErrorCode.INVALID_REFERENCE, "Budget not found")))
+                .flatMap(existing -> {
+                    if (!existing.getUserId().equals(userId)) {
+                        return Mono.error(new AppException(ErrorCode.INVALID_REFERENCE, "Budget does not belong to this user"));
+                    }
+                    return budgetRepo.delete(existing).thenReturn(true);
+                });
     }
 
     private static String safeTrim(String v) {

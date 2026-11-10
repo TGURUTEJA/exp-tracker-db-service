@@ -6,6 +6,6 @@
 spring:
   graphql:
     graphiql:
-      enabled: false
+      enabled: true
       path: /graphiql
-    path: /graphql
+  path: /graphql

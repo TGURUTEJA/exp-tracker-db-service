@@ -3,17 +3,17 @@ type Query {
     getAllUsers: UserListResponse!
     getUserById(input: IDInput!): UserDetailsResponse!
 
-    getAllCategories: CategoryListResponse!
-    getCategoryById(id: Int!): CategoryResponse!
-    getCategoriesByUserId(userId: String!): CategoryListResponse!
+    getCategoryById(id: ID!): Category
+    getCategoriesByUserId(userId: String!): [Category!]!
+    getAllCategories: [Category!]!
 
     getAllAccounts: AccountListResponse!
     getAccountById(id: ID!): AccountResponse!
     getAccountsByUserId(input: IDInput!): AccountListResponse!
 
-    getBudgetById(id: ID!): BudgetResponse!
-    getBudgetsByUserId(userId: String!): BudgetListResponse!
-    getBudgetsByUserIdAndDateRange(input: BudgetDateRangeInput!): BudgetListResponse!
+    getBudgetById(id: ID!, userId: String!): Budget
+    getBudgetsByUserId(userId: String!): [Budget!]!
+    getBudgetsByUserIdAndDateRange(userId: String!, startYear: Int!, startMonth: Int!, endYear: Int!, endMonth: Int!): [Budget!]!
 }
 
 
@@ -23,10 +23,10 @@ type Mutation {
     updateUser(id: String!, input: UserInput!): UserDetailsResponse!
     deleteUser(id: String!): UserDeleteResponse!
 
-    createCategory(input: CategoryPojo!): CategoryResponse!
-    createMultipleCategories(input: [CategoryPojo]!): CategoryListResponse!
-    updateCategory(id: Int!, input: CategoryPojo!): CategoryResponse!
-    deleteCategory(id: Int!): CategoryDeleteResponse!
+    createCategory(input: CategoryInput!): Category!
+    createMultipleCategories(input: [CategoryInput!]!): [Category!]!
+    updateCategory(id: ID!, input: CategoryInput!): Category!
+    deleteCategory(id: ID!): Boolean!
 
     createAccount(body: AccountInput!): AccountResponse!
     updateAccount(id: ID!, body: AccountInput!): AccountResponse!
@@ -36,7 +36,7 @@ type Mutation {
     updateTransaction(id: Int!, input: TransactionPojo!): TransactionResponse!
     deleteTransaction(id: Int!): TransactionDeleteResponse!
 
-    createBudget(input: BudgetInput!): BudgetResponse!
-    updateBudget(id: ID!, input: BudgetInput!): BudgetResponse!
-    deleteBudget(id: ID!): BudgetDeleteResponse!
+    createBudget(userId: String!, categoryId: Int!, year: Int!, month: Int!, amount: BigDecimal!, isActive: Boolean, recurrence: String): Budget!
+    updateBudget(id: ID!, userId: String!, categoryId: Int, year: Int, month: Int, amount: BigDecimal, isActive: Boolean, recurrence: String): Budget!
+    deleteBudget(id: ID!, userId: String!): Boolean!
 }

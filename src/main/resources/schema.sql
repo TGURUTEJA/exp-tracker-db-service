@@ -19,13 +19,15 @@ CREATE TABLE IF NOT EXISTS categories (
     id BIGSERIAL PRIMARY KEY,
     user_id VARCHAR(50) NOT NULL,
     name VARCHAR(50) NOT NULL,
-    type VARCHAR(20),
+    type VARCHAR(20) NOT NULL CHECK (type IN ('INCOME', 'WANT', 'NEED')),
     icon VARCHAR(50),
     color VARCHAR(20),
     CONSTRAINT fk_category_user
         FOREIGN KEY (user_id)
         REFERENCES userDetails(id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+     CONSTRAINT uq_category_user_name
+            UNIQUE (user_id, name)
 );
 
 -- Main accounts table (common fields)

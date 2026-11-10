@@ -2,7 +2,7 @@ package com.expenses_traker.db_service.Service;
 
 import com.expenses_traker.db_service.Entity.Budget;
 import com.expenses_traker.db_service.Repository.BudgetRepo;
-import com.expenses_traker.db_service.util.ResponseHealper;
+import com.expenses_traker.db_service.pojo.BudgetPojo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,80 +22,76 @@ class BudgetServiceTest {
     @Mock
     private BudgetRepo budgetRepo;
 
-    private final ResponseHealper responseHealper = new ResponseHealper();
-
     private BudgetService budgetService;
 
     @BeforeEach
     void setUp() {
-        budgetService = new BudgetService(budgetRepo, responseHealper);
+        budgetService = new BudgetService(budgetRepo);
     }
 
     @Test
     void createBudget_rejectsDuplicate() {
-        Budget b = new Budget();
-        b.setUserId("1");
-        b.setCategoryId(5L);
-        b.setYear(2026);
-        b.setMonth(4);
-        b.setAmount(BigDecimal.valueOf(1000));
+        BudgetPojo pojo = new BudgetPojo();
+        pojo.setUserId("user123");
+        pojo.setCategoryId(5L);
+        pojo.setYear(2026);
+        pojo.setMonth(4);
+        pojo.setAmount(BigDecimal.valueOf(1000));
 
-        when(budgetRepo.existsByUserIdAndCategoryIdAndYearAndMonth("1", 5L, 2026, 4)).thenReturn(Mono.just(true));
+        when(budgetRepo.existsByUserIdAndCategoryIdAndYearAndMonth("user123", 5L, 2026, 4))
+                .thenReturn(Mono.just(true));
 
-        StepVerifier.create(budgetService.createBudget(b))
-                .assertNext(res -> {
-                    assert res.isError();
-                    assert res.getMessage().contains("already exists");
-                })
-                .verifyComplete();
+        StepVerifier.create(budgetService.createBudget(pojo))
+                .expectErrorMessage("Budget already exists for this user/category/period")
+                .verify();
     }
 
     @Test
     void createBudget_savesWhenValid() {
-        Budget b = new Budget();
-        b.setUserId("1");
-        b.setCategoryId(5L);
-        b.setYear(2026);
-        b.setMonth(4);
-        b.setAmount(BigDecimal.valueOf(1000));
+        BudgetPojo pojo = new BudgetPojo();
+        pojo.setUserId("user123");
+        pojo.setCategoryId(5L);
+        pojo.setYear(2026);
+        pojo.setMonth(4);
+        pojo.setAmount(BigDecimal.valueOf(1000));
 
-        when(budgetRepo.existsByUserIdAndCategoryIdAndYearAndMonth("1", 5L, 2026, 4)).thenReturn(Mono.just(false));
-        when(budgetRepo.save(any(Budget.class))).thenAnswer(inv -> {
-            Budget saved = inv.getArgument(0);
-            saved.setId(99L);
-            return Mono.just(saved);
-        });
+        Budget savedBudget = new Budget();
+        savedBudget.setId(1L);
+        savedBudget.setUserId("user123");
+        savedBudget.setCategoryId(5L);
+        savedBudget.setYear(2026);
+        savedBudget.setMonth(4);
+        savedBudget.setAmount(BigDecimal.valueOf(1000));
 
-        StepVerifier.create(budgetService.createBudget(b))
-                .assertNext(res -> {
-                    assert !res.isError();
-                    assert res.getData() != null;
-                    assert res.getData().getId() != null;
+        when(budgetRepo.existsByUserIdAndCategoryIdAndYearAndMonth("user123", 5L, 2026, 4))
+                .thenReturn(Mono.just(false));
+        when(budgetRepo.save(any(Budget.class))).thenReturn(Mono.just(savedBudget));
+
+        StepVerifier.create(budgetService.createBudget(pojo))
+                .assertNext(budget -> {
+                    assert budget.getId().equals(1L);
+                    assert budget.getUserId().equals("user123");
                 })
                 .verifyComplete();
     }
 
     @Test
     void updateBudget_rejectsInvalidMonth() {
+        BudgetPojo pojo = new BudgetPojo();
+        pojo.setMonth(13);
+
         Budget existing = new Budget();
         existing.setId(1L);
-        existing.setUserId("1");
+        existing.setUserId("user123");
         existing.setCategoryId(5L);
         existing.setYear(2026);
         existing.setMonth(4);
         existing.setAmount(BigDecimal.valueOf(1000));
 
-        Budget patch = new Budget();
-        patch.setMonth(13);
-
         when(budgetRepo.findById(1L)).thenReturn(Mono.just(existing));
 
-        StepVerifier.create(budgetService.updateBudget(1L, patch))
-                .assertNext(res -> {
-                    assert res.isError();
-                    assert res.getMessage().contains("month must be between 1 and 12");
-                })
-                .verifyComplete();
+        StepVerifier.create(budgetService.updateBudget(1L, "user123", pojo))
+                .expectErrorMessage("Month must be between 1 and 12")
+                .verify();
     }
 }
-

@@ -1,0 +1,693 @@
+{
+  "info": {
+    "_postman_id": "budget-api-collection",
+    "name": "Budget API - CRUD Operations",
+    "description": "Complete CRUD operations for Budget management with userId requirement",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Budget Operations",
+      "item": [
+        {
+          "name": "1. Test Budget Service",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/DB/budget/test",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "DB",
+                "budget",
+                "test"
+              ]
+            },
+            "description": "Test if Budget service is running"
+          },
+          "response": []
+        },
+        {
+          "name": "2. Create Budget",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoryId\": 1,\n  \"year\": 2026,\n  \"month\": 6,\n  \"amount\": 5000.00,\n  \"isActive\": true,\n  \"recurrence\": \"monthly\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/DB/budget/create/user123",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "DB",
+                "budget",
+                "create",
+                "user123"
+              ]
+            },
+            "description": "Create a new budget for a user. Path parameter: userId (user123)"
+          },
+          "response": []
+        },
+        {
+          "name": "3. Create Budget (Another Example)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoryId\": 2,\n  \"year\": 2026,\n  \"month\": 6,\n  \"amount\": 3000.00,\n  \"isActive\": true,\n  \"recurrence\": \"monthly\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/DB/budget/create/user123",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "DB",
+                "budget",
+                "create",
+                "user123"
+              ]
+            },
+            "description": "Create another budget for the same user with different category"
+          },
+          "response": []
+        },
+        {
+          "name": "4. Get Budget by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/DB/budget/1/user123",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "DB",
+                "budget",
+                "1",
+                "user123"
+              ]
+            },
+            "description": "Get a specific budget by ID. Path parameters: budgetId (1), userId (user123). Budget must belong to the specified user."
+          },
+          "response": []
+        },
+        {
+          "name": "5. Get All Budgets for User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/DB/budget/user/user123",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "DB",
+                "budget",
+                "user",
+                "user123"
+              ]
+            },
+            "description": "Get all budgets for a specific user. Path parameter: userId (user123)"
+          },
+          "response": []
+        },
+        {
+          "name": "6. Get Budgets by Date Range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/DB/budget/user/user123/range?startYear=2026&startMonth=1&endYear=2026&endMonth=12",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "DB",
+                "budget",
+                "user",
+                "user123",
+                "range"
+              ],
+              "query": [
+                {
+                  "key": "startYear",
+                  "value": "2026"
+                },
+                {
+                  "key": "startMonth",
+                  "value": "1"
+                },
+                {
+                  "key": "endYear",
+                  "value": "2026"
+                },
+                {
+                  "key": "endMonth",
+                  "value": "12"
+                }
+              ]
+            },
+            "description": "Get budgets for a user within a specific date range. Path parameter: userId. Query parameters: startYear, startMonth, endYear, endMonth (1-12)"
+          },
+          "response": []
+        },
+        {
+          "name": "7. Update Budget",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 5500.00,\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/DB/budget/1/user123",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "DB",
+                "budget",
+                "1",
+                "user123"
+              ]
+            },
+            "description": "Update a budget. Path parameters: budgetId (1), userId (user123). Only fields provided will be updated."
+          },
+          "response": []
+        },
+        {
+          "name": "8. Update Budget - Change Period",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"year\": 2026,\n  \"month\": 7,\n  \"amount\": 5500.00\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/DB/budget/1/user123",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "DB",
+                "budget",
+                "1",
+                "user123"
+              ]
+            },
+            "description": "Update budget to a different month/year period"
+          },
+          "response": []
+        },
+        {
+          "name": "9. Delete Budget",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/DB/budget/1/user123",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "DB",
+                "budget",
+                "1",
+                "user123"
+              ]
+            },
+            "description": "Delete a budget. Path parameters: budgetId (1), userId (user123). Budget must belong to the specified user."
+          },
+          "response": []
+        },
+        {
+          "name": "Error Cases",
+          "item": [
+            {
+              "name": "ERROR - Get Budget with Wrong User ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/DB/budget/1/wrongUser",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "DB",
+                    "budget",
+                    "1",
+                    "wrongUser"
+                  ]
+                },
+                "description": "Should fail - Budget does not belong to this user"
+              },
+              "response": []
+            },
+            {
+              "name": "ERROR - Create Budget with Null UserId",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryId\": 1,\n  \"year\": 2026,\n  \"month\": 6,\n  \"amount\": 5000.00\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/DB/budget/create/",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "DB",
+                    "budget",
+                    "create",
+                    ""
+                  ]
+                },
+                "description": "Should fail - UserId is required"
+              },
+              "response": []
+            },
+            {
+              "name": "ERROR - Create Budget with Invalid Month",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryId\": 1,\n  \"year\": 2026,\n  \"month\": 13,\n  \"amount\": 5000.00\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/DB/budget/create/user123",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "DB",
+                    "budget",
+                    "create",
+                    "user123"
+                  ]
+                },
+                "description": "Should fail - Month must be between 1 and 12"
+              },
+              "response": []
+            },
+            {
+              "name": "ERROR - Create Budget with Missing Required Fields",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"month\": 6\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/DB/budget/create/user123",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "DB",
+                    "budget",
+                    "create",
+                    "user123"
+                  ]
+                },
+                "description": "Should fail - Missing required fields: categoryId, year, amount"
+              },
+              "response": []
+            },
+            {
+              "name": "ERROR - Create Duplicate Budget",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryId\": 1,\n  \"year\": 2026,\n  \"month\": 6,\n  \"amount\": 5000.00\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/DB/budget/create/user123",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "DB",
+                    "budget",
+                    "create",
+                    "user123"
+                  ]
+                },
+                "description": "Should fail on second attempt - Budget already exists for this user/category/period"
+              },
+              "response": []
+            },
+            {
+              "name": "ERROR - Delete Budget with Wrong User ID",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/DB/budget/1/wrongUser",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "DB",
+                    "budget",
+                    "1",
+                    "wrongUser"
+                  ]
+                },
+                "description": "Should fail - Budget does not belong to this user"
+              },
+              "response": []
+            },
+            {
+              "name": "ERROR - Invalid Date Range",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/DB/budget/user/user123/range?startYear=2026&startMonth=12&endYear=2026&endMonth=1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "DB",
+                    "budget",
+                    "user",
+                    "user123",
+                    "range"
+                  ],
+                  "query": [
+                    {
+                      "key": "startYear",
+                      "value": "2026"
+                    },
+                    {
+                      "key": "startMonth",
+                      "value": "12"
+                    },
+                    {
+                      "key": "endYear",
+                      "value": "2026"
+                    },
+                    {
+                      "key": "endMonth",
+                      "value": "1"
+                    }
+                  ]
+                },
+                "description": "Should fail - Start period must be before or equal to end period"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GraphQL Budget Operations",
+      "item": [
+        {
+          "name": "GraphQL - Create Budget",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation { createBudget(userId: \\\"user123\\\", categoryId: 1, year: 2026, month: 6, amount: 5000.00, isActive: true, recurrence: \\\"monthly\\\") { id userId categoryId year month amount isActive recurrence createdAt updatedAt } }\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "graphql"
+              ]
+            },
+            "description": "Create a budget via GraphQL with query parameters"
+          },
+          "response": []
+        },
+        {
+          "name": "GraphQL - Get Budget by ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query { getBudgetById(id: 1, userId: \\\"user123\\\") { id userId categoryId year month amount isActive recurrence createdAt updatedAt } }\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "graphql"
+              ]
+            },
+            "description": "Get a budget by ID via GraphQL"
+          },
+          "response": []
+        },
+        {
+          "name": "GraphQL - Get All Budgets for User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query { getBudgetsByUserId(userId: \\\"user123\\\") { id userId categoryId year month amount isActive recurrence createdAt updatedAt } }\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "graphql"
+              ]
+            },
+            "description": "Get all budgets for a user via GraphQL"
+          },
+          "response": []
+        },
+        {
+          "name": "GraphQL - Update Budget",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation { updateBudget(id: 1, userId: \\\"user123\\\", year: 2026, month: 7, amount: 5500.00) { id userId categoryId year month amount isActive recurrence createdAt updatedAt } }\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "graphql"
+              ]
+            },
+            "description": "Update a budget via GraphQL with query parameters"
+          },
+          "response": []
+        },
+        {
+          "name": "GraphQL - Delete Budget",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation { deleteBudget(id: 1, userId: \\\"user123\\\") }\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "graphql"
+              ]
+            },
+            "description": "Delete a budget via GraphQL"
+          },
+          "response": []
+        },
+        {
+          "name": "GraphQL - Get Budgets by Date Range",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query { getBudgetsByUserIdAndDateRange(userId: \\\"user123\\\", startYear: 2026, startMonth: 1, endYear: 2026, endMonth: 12) { id userId categoryId year month amount isActive recurrence createdAt updatedAt } }\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/graphql",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "graphql"
+              ]
+            },
+            "description": "Get budgets by date range via GraphQL with query parameters"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
+
