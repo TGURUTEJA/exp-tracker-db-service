@@ -63,7 +63,17 @@ public class UserDetailsService {
         return getUserById(id)
                 .flatMap(data -> {
                     if (data.isError() || data.getData() == null) {
-                        return Mono.just(buildResponse(null, true, data.getMessage()));
+                        if (input.getFirstName() == null || input.getFirstName().isBlank()) {
+                            return Mono.just(buildResponse(null, true, "First name is required"));
+                        }
+                        UserDetailsEntity user = new UserDetailsEntity();
+                        user.setId(id);
+                        user.setFirstName(input.getFirstName());
+                        user.setLastName(input.getLastName());
+                        user.setDob(input.getDob());
+                        return template.insert(UserDetailsEntity.class)
+                                .using(user)
+                                .map(inserted -> buildResponse(inserted, false, "User profile created successfully"));
                     }
                     UserDetailsEntity user = new UserDetailsEntity();
                     user.setId(id);
