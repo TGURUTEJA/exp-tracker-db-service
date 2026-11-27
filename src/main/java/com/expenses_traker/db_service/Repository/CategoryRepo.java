@@ -7,6 +7,7 @@ import reactor.core.publisher.Flux;
 
 public interface CategoryRepo extends R2dbcRepository<CategoryEntity, Long> {
     Flux<CategoryEntity> findByUserId(String userId);
+    Mono<CategoryEntity> findByIdAndUserId(Long id, String userId);
 
     Mono<Boolean> existsByUserIdAndName(String userId, String name);
 

@@ -10,6 +10,7 @@ import com.expenses_traker.db_service.util.ResponseHealper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.reactive.TransactionalOperator;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
@@ -26,6 +27,25 @@ public class AccountService {
     private final FriendAccountDetailsRepo friendRepo;
     private final ResponseHealper responseHealper;
     private final R2dbcEntityTemplate template;
+    private final TransactionalOperator transactionalOperator;
+
+    private static final String ACCOUNT_SEQUENCE_LOCK_SQL =
+            "SELECT pg_advisory_xact_lock(hashtext('expense-tracker.account-id-sequence'))";
+
+    private static final String ACCOUNT_SEQUENCE_SYNC_SQL = """
+            SELECT setval(
+                pg_get_serial_sequence('accounts', 'id')::regclass,
+                GREATEST(
+                  (SELECT last_value FROM accounts_id_seq),
+                  COALESCE((SELECT MAX(id) FROM accounts), 1),
+                  COALESCE((SELECT MAX(account_id) FROM credit_card_details), 1),
+                  COALESCE((SELECT MAX(account_id) FROM emi_account_details), 1),
+                  COALESCE((SELECT MAX(account_id) FROM investment_account_details), 1),
+                  COALESCE((SELECT MAX(account_id) FROM friend_account_details), 1)
+                ),
+                true
+              )
+            """;
 
     // 🟢 CREATE account (with subtype)
     public Mono<APIResponse<AccountDetails>> createAccount(AccountDetails input) {
@@ -35,12 +55,26 @@ public class AccountService {
 
         AccountEntity entity = mapToEntity(input);
 
-        return accountRepo.save(entity)
+        return synchronizeAccountIdSequence()
+                .then(accountRepo.save(entity))
                 .flatMap(saved -> handleSubtypeCreateOrUpdate(saved.getId(), saved.getType(), input.getAdditionalData(),"CREATE")
                         .then(populateAccountDetails(saved))
                         .map(details -> responseHealper.buildSuccessResponse(details, "Account created successfully"))
                 )
+                .as(transactionalOperator::transactional)
                 .onErrorResume(e -> Mono.just(responseHealper.buildErrorResponse("Failed to create account: " + e.getMessage())));
+    }
+
+    private Mono<Void> synchronizeAccountIdSequence() {
+        return template.getDatabaseClient()
+                .sql(ACCOUNT_SEQUENCE_LOCK_SQL)
+                .map((row, metadata) -> Boolean.TRUE)
+                .one()
+                .then(template.getDatabaseClient()
+                        .sql(ACCOUNT_SEQUENCE_SYNC_SQL)
+                        .map((row, metadata) -> Boolean.TRUE)
+                        .one())
+                .then();
     }
 
     // 🟡 GET by ID (with subtype)

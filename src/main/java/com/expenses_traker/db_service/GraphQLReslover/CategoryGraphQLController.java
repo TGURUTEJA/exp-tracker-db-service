@@ -49,7 +49,10 @@ public class CategoryGraphQLController {
     }
 
     @MutationMapping
-    public Mono<Boolean> deleteCategory(@Argument Long id) {
-        return categoryService.deleteCategory(id);
+    public Mono<Boolean> deleteCategory(
+            @Argument Long id,
+            @Argument String userId
+    ) {
+        return categoryService.deleteCategory(id, userId);
     }
 }

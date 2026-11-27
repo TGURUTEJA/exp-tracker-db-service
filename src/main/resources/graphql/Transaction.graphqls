@@ -1,12 +1,13 @@
 type Transaction {
     id: Int
     userId: String
-    amount: Float
+    accountId: Float
+    amount: BigDecimal
     debitCredit: String
     categoryId: Int
     description: String
     created: String
-    accountBalance: Float
+    accountBalance: BigDecimal
 }
 
 type TransactionListResponse{
@@ -25,10 +26,10 @@ type TransactionDeleteResponse{
     data: Boolean
 }
 input TransactionPojo {
-    userId: String
-    accountId: Float
-    debitCredit: String
+    accountId: Float!
+    debitCredit: String!
     categoryId: Int
     description: String
-    amount: Float
+    amount: BigDecimal!
+    created: String
 }

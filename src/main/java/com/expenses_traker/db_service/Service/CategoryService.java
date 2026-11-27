@@ -115,16 +115,26 @@ public class CategoryService {
         if (id == null) {
             throw new AppException(ErrorCode.INVALID_INPUT, "Category id cannot be null");
         }
+        String userId = input == null ? null : safeTrim(input.getUserId());
+        if (userId == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "User ID cannot be null or empty");
+        }
 
-        return categoryRepo.findById(id)
+        return categoryRepo.findByIdAndUserId(id, userId)
                 .switchIfEmpty(Mono.error(new AppException(ErrorCode.INVALID_REFERENCE, "Category not found")))
                 .flatMap(existing -> {
 
                     String name = input.getName() != null ? safeTrim(input.getName()) : null;
                     String type = input.getType() != null ? normalizeType(input.getType()) : null;
 
+                    if (input.getName() != null && name == null) {
+                        return Mono.error(new AppException(ErrorCode.INVALID_INPUT, "Category name cannot be empty"));
+                    }
+                    if (type != null && !isValidType(type)) {
+                        return Mono.error(new AppException(ErrorCode.INVALID_INPUT, "Invalid category type"));
+                    }
                     if (name != null) existing.setName(name);
-                    if (type != null && isValidType(type)) existing.setType(type);
+                    if (type != null) existing.setType(type);
                     if (input.getIcon() != null) existing.setIcon(input.getIcon());
                     if (input.getColor() != null) existing.setColor(input.getColor());
 
@@ -132,13 +142,17 @@ public class CategoryService {
                 });
     }
 
-    public Mono<Boolean> deleteCategory(Long id) {
+    public Mono<Boolean> deleteCategory(Long id, String userId) {
 
         if (id == null) {
             throw new AppException(ErrorCode.INVALID_INPUT, "Category id cannot be null");
         }
+        String validatedUserId = safeTrim(userId);
+        if (validatedUserId == null) {
+            throw new AppException(ErrorCode.INVALID_INPUT, "User ID cannot be null or empty");
+        }
 
-        return categoryRepo.findById(id)
+        return categoryRepo.findByIdAndUserId(id, validatedUserId)
                 .switchIfEmpty(Mono.error(new AppException(ErrorCode.INVALID_REFERENCE, "Category not found")))
                 .flatMap(entity -> categoryRepo.delete(entity).thenReturn(true));
     }

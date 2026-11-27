@@ -1,5 +1,7 @@
 # 🎉 Budget CRUD Implementation - Complete Summary
 
+> Workspace context: see the [project map](../project-structure.md), [account feature notes](../account-change.md), and [change log](../change-log.md). This document remains focused on the budget implementation.
+
 ## ✅ Implementation Status: COMPLETE
 
 All requirements have been implemented successfully. The project builds without errors.

@@ -10,6 +10,14 @@ type Query {
     getAllAccounts: AccountListResponse!
     getAccountById(id: ID!): AccountResponse!
     getAccountsByUserId(input: IDInput!): AccountListResponse!
+    getTransactionsByUserId(
+        userId: String!,
+        startDate: String,
+        endDate: String,
+        accountId: Float,
+        categoryId: Int,
+        newestFirst: Boolean
+    ): [Transaction!]!
 
     getBudgetById(id: ID!, userId: String!): Budget
     getBudgetsByUserId(userId: String!): [Budget!]!
@@ -26,15 +34,15 @@ type Mutation {
     createCategory(input: CategoryInput!): Category!
     createMultipleCategories(input: [CategoryInput!]!): [Category!]!
     updateCategory(id: ID!, input: CategoryInput!): Category!
-    deleteCategory(id: ID!): Boolean!
+    deleteCategory(id: ID!, userId: String!): Boolean!
 
     createAccount(body: AccountInput!): AccountResponse!
     updateAccount(id: ID!, body: AccountInput!): AccountResponse!
     deleteAccount(id: ID!): AccountResponse!
 
-    createTransaction(input: TransactionPojo!): TransactionResponse!
-    updateTransaction(id: Int!, input: TransactionPojo!): TransactionResponse!
-    deleteTransaction(id: Int!): TransactionDeleteResponse!
+    createTransaction(userId: String!, input: TransactionPojo!): TransactionResponse!
+    updateTransaction(id: Int!, userId: String!, input: TransactionPojo!): TransactionResponse!
+    deleteTransaction(id: Int!, userId: String!): TransactionDeleteResponse!
 
     createBudget(userId: String!, categoryId: Int!, year: Int!, month: Int!, amount: BigDecimal!, isActive: Boolean, recurrence: String): Budget!
     updateBudget(id: ID!, userId: String!, categoryId: Int, year: Int, month: Int, amount: BigDecimal, isActive: Boolean, recurrence: String): Budget!

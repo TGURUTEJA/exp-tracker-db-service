@@ -3,12 +3,21 @@ package com.expenses_traker.db_service.Repository;
 import com.expenses_traker.db_service.Entity.Transaction;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.repository.query.Param;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface TransactionRepo extends ReactiveCrudRepository<Transaction, Long> {
 
-    // All transactions for a user
     Flux<Transaction> findByUserId(String userId);
+
+    // Keep account history stable for period balance calculations.
+    Flux<Transaction> findByUserIdOrderByCreatedAscIdAsc(String userId);
+
+    Flux<Transaction> findByAccountIdOrderByCreatedAscIdAsc(Long accountId);
+
+    @Query("SELECT * FROM transactions WHERE id = :id AND user_id = :userId FOR UPDATE")
+    Mono<Transaction> findByIdAndUserIdForUpdate(@Param("id") Long id, @Param("userId") String userId);
 
     // All transactions for a specific account
     Flux<Transaction> findByAccountId(Long accountId);

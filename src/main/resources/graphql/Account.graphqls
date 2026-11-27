@@ -84,6 +84,8 @@ type EmiAccountDetails {
     emiAmount: Float
     totalInstallments: Int
     paidInstallments: Int
+    startDate: Date
+    endDate: Date
     nextDueDate: Date
 }
 
@@ -93,12 +95,16 @@ input EmiInput {
     emiAmount: Float
     totalInstallments: Int
     paidInstallments: Int
+    startDate: Date
+    endDate: Date
     nextDueDate: Date
 }
 
 "Investment Account Fields"
 type InvestmentAccountDetails {
     investmentType: String
+    purchaseDate: Date
+    maturityDate: Date
     amountInvested: Float
     currentValue: Float
     expectedReturn: Float
@@ -106,6 +112,8 @@ type InvestmentAccountDetails {
 
 input InvestmentInput {
     investmentType: String
+    purchaseDate: Date
+    maturityDate: Date
     amountInvested: Float
     currentValue: Float
     expectedReturn: Float
